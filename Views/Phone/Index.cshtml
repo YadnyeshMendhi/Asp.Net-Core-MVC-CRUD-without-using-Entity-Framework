@@ -8,21 +8,35 @@
         <h1 class="text-center">@ViewData["Title"]</h1>
     </div>
 
+     @if (TempData["AlertMessage"] != null)
+      { 
+          
+               <div class="alert alert-success">
+               <strong>Succcess  </strong>@TempData["AlertMessage"]
+               </div>
+      }
+
 
 <table class="table table table-dark">
     <thead class="thead-light">
         <tr>
             <th>
-               Phone Brand
+                Phone Brand
             </th>
             <th>
                 Phone Model
             </th>
             <th>
-               Phone Price
+                Phone Price
             </th>
             <th>
-                <a asp-action="AddorEdit">Create New</a>
+                Phone Price
+            </th>
+            <th>
+                Date : @DateTime.Now
+            </th>
+            <th>
+                <a asp-action="AddorEdit" button type="button" class="btn btn-primary">Create New</a>
             </th>
         </tr>
     </thead>
@@ -39,9 +53,10 @@
             <td>
                 @Model.Rows[i]["Price"]
             </td>
+           
             <td>
-                <a asp-action="AddorEdit" asp-route-id=" @Model.Rows[i]["PhoneID"]" class="btn-primary">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@Model.Rows[i]["PhoneID"]" class="btn-danger">Delete</a>
+                <a asp-action="AddorEdit" asp-route-id=" @Model.Rows[i]["PhoneID"]" button type="button" class="btn btn-primary">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Rows[i]["PhoneID"]" button type="button" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 } 
