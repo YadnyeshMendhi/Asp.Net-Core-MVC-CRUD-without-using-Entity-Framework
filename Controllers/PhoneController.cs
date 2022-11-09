@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 
 namespace CRUDwithoutEF.Controllers
 {
@@ -51,16 +52,17 @@ namespace CRUDwithoutEF.Controllers
             if (id > 0)
                 pvm = FetchPhoneById(id);
             return View(pvm);
+           
 
 
         }
 
-        // POST: Phone/AddorEdit/5
+        // POST: Phone/PhoneAddorEdit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddorEdit(int id, [Bind("PhoneID,Brand,Model,Price,Date,Time")] PhoneViewModel pvm)
+        public IActionResult AddorEdit(int id, [Bind("PhoneID,Brand,Model,Price")] PhoneViewModel pvm)
         {
 
             if (ModelState.IsValid)
@@ -73,9 +75,10 @@ namespace CRUDwithoutEF.Controllers
                     sqlcmd.Parameters.AddWithValue("PhoneID", pvm.PhoneID);
                     sqlcmd.Parameters.AddWithValue("Brand", pvm.Brand.Trim());
                     sqlcmd.Parameters.AddWithValue("Model", pvm.Model.Trim());
-                    sqlcmd.Parameters.AddWithValue("Price", pvm.Price);                
+                    sqlcmd.Parameters.AddWithValue("Price", pvm.Price);
                     sqlcmd.ExecuteNonQuery();
                     TempData["AlertMessage"] = "Record inserted";
+                   
 
 
 
@@ -137,44 +140,15 @@ namespace CRUDwithoutEF.Controllers
                 if (dtbl.Rows.Count == 1)
                 {
                     pvm.PhoneID = Convert.ToInt32(dtbl.Rows[0]["PhoneID"].ToString());
-                    pvm.Brand = dtbl.Rows[0]["Brand"].ToString();
-                    pvm.Model = dtbl.Rows[0]["Model"].ToString();
-                    pvm.Price = Convert.ToInt32(dtbl.Rows[0]["Price"].ToString());
+                    pvm.Brand = dtbl.Rows[0]["Brand"].ToString().Trim();
+                    pvm.Model = dtbl.Rows[0]["Model"].ToString().Trim();
+                    pvm.Price = Convert.ToInt32(dtbl.Rows[0]["Price"].ToString().Trim());
+                   
 
                 }
                 return pvm;
 
             }
-            [NonAction]
-            public PhoneViewModel FetchDateandTime(int? id)
-            {
-                PhoneViewModel pvm = new PhoneViewModel();
-
-                DataTable dtbl = new DataTable();
-                using (SqlConnection sqlconnection = new SqlConnection(_configuration.GetConnectionString("DevConnection")))
-                {
-                    sqlconnection.Open();
-                    SqlDataAdapter sqlDa = new SqlDataAdapter("PhoneViewByID", sqlconnection);
-                    sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    sqlDa.SelectCommand.Parameters.AddWithValue("PhoneID", id);
-                    sqlDa.Fill(dtbl);
-                    if (dtbl.Rows.Count == 1)
-                    {
-                        pvm.PhoneID = Convert.ToInt32(dtbl.Rows[0]["PhoneID"].ToString());
-                        pvm.Brand = dtbl.Rows[0]["Brand"].ToString();
-                        pvm.Model = dtbl.Rows[0]["Model"].ToString();
-                        pvm.Price = Convert.ToInt32(dtbl.Rows[0]["Price"].ToString());
-
-                    }
-                    return pvm;
-
-                }
-
-
-
-            }
-
-
         }
     }
 }

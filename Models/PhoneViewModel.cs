@@ -10,14 +10,22 @@ namespace CRUDwithoutEF.Models
     {
         [Key]
         public int PhoneID { get; set; }
-        [Required]
-        public string Brand  { get; set; }
-        [Required]
+
+        [Required(ErrorMessage ="Please enter Brand name")]
+        public string Brand { get; set; }
+
+        [Required(ErrorMessage ="Please enter Model name")]
         public string Model { get; set; }
-        [Range(1,int.MaxValue, ErrorMessage ="Should be greater than or equal 1")]
+
+        [Required(ErrorMessage = "Please enter Price ")]
+        [Range(1, int.MaxValue, ErrorMessage = "Should be greater than or equal 1")]
         public int Price { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime Date { get; set; }
+        /*
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime ModifiedDate { get; set; }*/
+
+        public DateTime DateTime { get; set; }
     }
 }

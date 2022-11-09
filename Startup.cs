@@ -41,7 +41,7 @@ namespace CRUDwithoutEF
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Phone/AddorEdit");
             }
             app.UseStaticFiles();
 
@@ -55,7 +55,7 @@ namespace CRUDwithoutEF
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Phone1}/{action=AddorEdit}/{id?}");
             });
         }
     }

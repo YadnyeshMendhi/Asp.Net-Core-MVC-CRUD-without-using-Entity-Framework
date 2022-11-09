@@ -147,3 +147,6 @@ C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\obj\Debug\net5.0\CRUDwithoutEF.genr
 C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\obj\Debug\net5.0\Razor\Views\Phone\AddorEdit.cshtml.g.cs
 C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\obj\Debug\net5.0\Razor\Views\Phone\Delete.cshtml.g.cs
 C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\obj\Debug\net5.0\Razor\Views\Phone\Index.cshtml.g.cs
+C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Yadnyesh\source\repos\CRUDwithoutEF\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
